@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Affaire - Monopoly Deal DZ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="toast-container"></div>
+    <div id="game-container">
+        <!-- Header / Status Bar -->
+        <header>
+            <h1>L'Affaire (الصفقة)</h1>
+            <div id="status-bar">
+                <span id="turn-indicator">دور اللاعب: <span id="current-player-name">...</span></span>
+                <span id="phase-indicator">المرحلة: <span id="current-phase">...</span></span>
+                <span id="deck-count">البطاقات: <span id="cards-left">0</span></span>
+            </div>
+        </header>
+
+        <!-- Opponent Area (AI) -->
+        <div id="opponent-area" class="player-area">
+            <div class="player-info">
+                <h2>الخصم (AI)</h2>
+                <div class="bank-display">الرصيد: <span id="ai-bank-total">0</span>M</div>
+            </div>
+            
+            <div class="zone-row">
+                <div class="zone-container property-zone">
+                    <div class="zone-label">الممتلكات (Les Biens)</div>
+                    <div class="field-container" id="ai-field">
+                        <!-- AI Property Sets go here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="zone-row">
+                <div class="zone-container bank-zone">
+                    <div class="zone-label">الخزنة (Le Coffre)</div>
+                    <div class="bank-container" id="ai-bank">
+                        <!-- AI Bank Cards go here -->
+                    </div>
+                </div>
+                <div class="zone-container hand-zone">
+                    <div class="zone-label">اليد (La Main)</div>
+                    <div class="hand-container" id="ai-hand">
+                        <!-- AI Hand (Back of cards) -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Area (Deck & Discard) -->
+        <div id="center-area">
+            <div id="deck-container">
+                <div id="deck" class="card-stack">
+                    <div class="card-back"></div>
+                </div>
+                <div class="deck-shadow"></div>
+                <div class="deck-shadow-2"></div>
+            </div>
+            
+            <div id="discard-pile" class="card-stack">
+                <div class="placeholder-icon">🗑️</div>
+                <div class="placeholder-text">مرمية</div>
+            </div>
+            
+            <!-- Action Log moved to sidebar/floating -->
+            <div id="action-log-container">
+                 <div class="log-header">
+                    <span>سجل الأحداث</span>
+                    <button id="toggle-log-btn">−</button>
+                 </div>
+                 <div id="action-log"></div>
+            </div>
+
+            <!-- Card Inspector (Preview Zone) - Right Side -->
+            <div id="card-inspector">
+                <div class="inspector-header">معاينة البطاقة</div>
+                <div id="inspector-content">
+                    <div class="inspector-placeholder">مرر الفأرة فوق أي بطاقة للمعاينة</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Player Area (Human) -->
+        <div id="player-area" class="player-area">
+            <div class="player-info">
+                <h2>أنت</h2>
+                <div class="bank-display">الرصيد: <span id="player-bank-total">0</span>M</div>
+                <div class="moves-container">
+                    <span>الحركات:</span>
+                    <div id="moves-display" class="moves-visual">
+                        <!-- Icons injected by JS -->
+                        <div class="move-dot active"></div>
+                        <div class="move-dot active"></div>
+                        <div class="move-dot active"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="zone-row">
+                <div class="zone-container property-zone">
+                    <div class="zone-label">الممتلكات (Les Biens)</div>
+                    <div class="field-container" id="player-field">
+                        <!-- Player Property Sets go here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="zone-row">
+                <div class="zone-container bank-zone">
+                    <div class="zone-label">الخزنة (Le Coffre)</div>
+                    <div class="bank-container" id="player-bank">
+                        <!-- Player Bank Cards go here -->
+                    </div>
+                </div>
+                <div class="zone-container hand-zone">
+                    <div class="zone-label">اليد (La Main)</div>
+                    <div class="hand-container" id="player-hand">
+                        <!-- Player Hand Cards go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div id="controls">
+            <button id="end-turn-btn" disabled>إنهاء الدور</button>
+            <button id="confirm-payment-btn" style="display:none; background-color: #e74c3c; color: white;">دفع (0M)</button>
+            <button id="decline-btn" style="display:none; background-color: #95a5a6; color: white;">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/models.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
